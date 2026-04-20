@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Recommendations — SmartFlow Supply</title>
+  <meta name="description" content="Gemini AI-powered cost-saving recommendations to resolve supply chain disruptions." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style_supply.css" />
+</head>
+<body class="recommendation-page">
+
+  <nav class="nav">
+    <a class="nav-brand" href="dashboard_supply.html">
+      <div class="logo-icon">SF</div>
+      <span class="nav-title">SmartFlow <span>Supply</span></span>
+    </a>
+    <div class="nav-links" id="navLinks"><!-- injected --></div>
+    <a class="back-btn" href="disruption_supply.html">← Back to Analysis</a>
+  </nav>
+
+  <div class="page-wrapper">
+
+    <div class="page-header">
+      <h1>AI Recommendations</h1>
+      <p>Gemini-powered actionable options to resolve disruption and minimise financial loss</p>
+    </div>
+
+    <!-- Context Strip -->
+    <div class="context-strip">
+      <div class="ctx-item"><div class="ctx-label">Shipment</div><div class="ctx-value" id="ctxId">—</div></div>
+      <div class="ctx-item"><div class="ctx-label">Route</div><div class="ctx-value" id="ctxRoute">—</div></div>
+      <div class="ctx-item"><div class="ctx-label">Total Exposure</div><div class="ctx-value danger" id="ctxLoss">—</div></div>
+      <div class="ctx-item"><div class="ctx-label">Delay</div><div class="ctx-value" id="ctxDelay">—</div></div>
+    </div>
+
+    <!-- Gen Section -->
+    <div class="gen-section">
+      <div class="gen-header">
+        <div class="analysis-title">Generate Cost-Saving Options</div>
+        <span class="gemini-badge">Gemini AI</span>
+      </div>
+
+      <button class="gen-btn" id="genBtn">✦ Generate AI Recommendations</button>
+
+      <div class="loading-box hidden" id="loadingBox">
+        <div class="spinner"></div>
+        <div class="loading-text">Gemini is generating recommendations…</div>
+      </div>
+
+      <div class="recs-grid hidden" id="recsGrid"><!-- injected --></div>
+    </div>
+
+  </div>
+
+  <!-- Success Toast -->
+  <div class="success-toast hidden" id="successToast">
+    <div class="toast-icon">✓</div>
+    <div class="toast-content">
+      <div class="toast-title">Recommendation Accepted</div>
+      <div class="toast-msg">Saved to Firestore. Redirecting…</div>
+    </div>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+  <script src="data_supply.js"></script>
+  <script src="firebase_supply.js"></script>
+  <script src="gemini_supply.js"></script>
+  <script src="main_supply.js"></script>
+</body>
+</html>
