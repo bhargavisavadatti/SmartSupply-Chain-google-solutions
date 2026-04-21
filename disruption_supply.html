@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Disruption Analysis — SmartFlow Supply</title>
+  <meta name="description" content="AI-powered disruption analysis. Get real-time Gemini analysis of financial impact from supply chain delays." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style_supply.css" />
+</head>
+<body class="disruption-page">
+
+  <nav class="nav">
+    <a class="nav-brand" href="dashboard_supply.html">
+      <div class="logo-icon">SF</div>
+      <span class="nav-title">SmartFlow <span>Supply</span></span>
+    </a>
+    <div class="nav-links" id="navLinks"><!-- injected --></div>
+    <a class="back-btn" href="dashboard_supply.html">← Dashboard</a>
+  </nav>
+
+  <div class="page-wrapper">
+
+    <div class="page-header">
+      <h1>Disruption Analysis</h1>
+      <p>Review shipment details and run AI financial impact analysis</p>
+    </div>
+
+    <!-- Info Card -->
+    <div class="info-card">
+      <div class="info-card-header">
+        <div class="shipment-meta">
+          <div class="shipment-id-lg" id="shipId">—</div>
+          <div class="shipment-route">
+            <span id="origin">—</span>
+            <span class="route-sep">→</span>
+            <span id="dest">—</span>
+          </div>
+        </div>
+        <div id="statusBadge" class="status-badge status-disrupted">
+          <span id="statusText">Disrupted</span>
+        </div>
+      </div>
+      <div class="info-grid">
+        <div><div class="info-item-label">Supplier</div><div class="info-item-value" id="supplier">—</div></div>
+        <div><div class="info-item-label">Goods</div><div class="info-item-value" id="goods">—</div></div>
+        <div><div class="info-item-label">Shipment Value</div><div class="info-item-value money" id="value">—</div></div>
+        <div><div class="info-item-label">Expected Delivery</div><div class="info-item-value" id="delivery">—</div></div>
+        <div><div class="info-item-label">Delay</div><div class="info-item-value danger" id="delayDays">—</div></div>
+        <div><div class="info-item-label">Penalty Rate</div><div class="info-item-value danger" id="penalty">—</div></div>
+      </div>
+    </div>
+
+    <!-- Disruption Alert -->
+    <div class="disruption-alert">
+      <div class="disruption-alert-icon">⚠️</div>
+      <div class="disruption-alert-body">
+        <div class="disruption-alert-title">Active Disruption Detected</div>
+        <div id="disruptionText">—</div>
+      </div>
+    </div>
+
+    <!-- Analysis Section -->
+    <div class="analysis-section">
+      <div class="analysis-header">
+        <div class="analysis-title">AI Financial Impact Analysis</div>
+        <span class="gemini-badge">Gemini AI</span>
+      </div>
+
+      <button class="analyse-btn" id="analyseBtn">Run AI Analysis</button>
+
+      <div class="loading-box hidden" id="loadingBox">
+        <div class="spinner"></div>
+        <div class="loading-text">Gemini is analysing financial impact…</div>
+      </div>
+
+      <div class="results-box hidden" id="resultsBox">
+        <div class="ai-summary" id="aiSummary"></div>
+        <div class="impact-table-wrap">
+          <table class="impact-table">
+            <thead>
+              <tr><th>Cost Component</th><th>Calculation</th><th>Amount</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Delay Duration</td><td>Shipment delay period</td><td id="t-delay">—</td></tr>
+              <tr><td>Contractual Penalties</td><td>Penalty per day × delay days</td><td id="t-penalty">—</td></tr>
+              <tr><td>Holding &amp; Storage</td><td>Holding cost per day × delay days</td><td id="t-holding">—</td></tr>
+              <tr class="total-row"><td><strong>Total Financial Exposure</strong></td><td>Penalty + Holding</td><td id="t-total"><strong>—</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <button class="proceed-btn" id="proceedBtn">View AI Recommendations →</button>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+  <script src="data_supply.js"></script>
+  <script src="firebase_supply.js"></script>
+  <script src="gemini_supply.js"></script>
+  <script src="main_supply.js"></script>
+</body>
+</html>

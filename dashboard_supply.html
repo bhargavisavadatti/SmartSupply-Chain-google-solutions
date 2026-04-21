@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard — SmartFlow Supply</title>
+  <meta name="description" content="SmartFlow Supply role-based dashboard — real-time shipment monitoring, financial risk tracking, and executive overview." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style_supply.css" />
+</head>
+<body class="dashboard-page">
+
+  <nav class="nav">
+    <a class="nav-brand" href="dashboard_supply.html">
+      <div class="logo-icon">SF</div>
+      <span class="nav-title">SmartFlow <span>Supply</span></span>
+    </a>
+    <div class="nav-links" id="navLinks"><!-- injected by JS --></div>
+    <div style="display:flex;align-items:center;gap:8px;">
+      <div style="position:relative;">
+        <button class="notif-btn" id="notifBtn" title="Notifications">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+          <span class="notif-badge hidden" id="notifBadge">0</span>
+        </button>
+        <div class="notif-dropdown hidden" id="notifDropdown">
+          <div class="notif-header">Notifications</div>
+          <div id="notifList"><div class="notif-empty">No new notifications</div></div>
+        </div>
+      </div>
+      <div class="user-pill">
+        <span class="user-pill-dot"></span>
+        <span id="userEmail">—</span>
+      </div>
+    </div>
+  </nav>
+
+  <div class="page-wrapper">
+
+    <div class="page-header">
+      <h1>Dashboard</h1>
+      <p id="dateDisplay"></p>
+    </div>
+
+    <!-- Live Ticker -->
+    <div class="ticker-bar">
+      <div class="ticker-label">LIVE</div>
+      <div class="ticker-track">
+        <div class="ticker-content" id="tickerContent">Loading alerts…</div>
+      </div>
+    </div>
+
+    <!-- Stat Cards -->
+    <div class="stats-grid">
+      <div class="stat-card" style="animation-delay:0s">
+        <div class="stat-card-label">Total Shipments</div>
+        <div class="stat-card-value accent" id="totalShipments">—</div>
+        <div class="stat-card-sub">Active monitored routes</div>
+      </div>
+      <div class="stat-card" style="animation-delay:0.08s">
+        <div class="stat-card-label">Disrupted</div>
+        <div class="stat-card-value danger" id="disrupted">—</div>
+        <div class="stat-card-sub">Need immediate action</div>
+      </div>
+      <div class="stat-card" style="animation-delay:0.16s">
+        <div class="stat-card-label">At Risk</div>
+        <div class="stat-card-value warning" id="atRisk">—</div>
+        <div class="stat-card-sub">Monitoring in progress</div>
+      </div>
+      <div class="stat-card" style="animation-delay:0.24s">
+        <div class="stat-card-label">Total Financial Risk</div>
+        <div class="stat-card-value warning" id="totalRisk">—</div>
+        <div class="stat-card-sub">Penalties + holding costs</div>
+      </div>
+    </div>
+
+    <!-- Section Header -->
+    <div class="section-header">
+      <div class="section-title">Active Shipments</div>
+      <div class="filter-btns">
+        <button class="filter-btn active" data-filter="all" id="filter-all">All</button>
+        <button class="filter-btn" data-filter="disrupted" id="filter-disrupted">Disrupted</button>
+        <button class="filter-btn" data-filter="at-risk" id="filter-at-risk">At Risk</button>
+        <button class="filter-btn" data-filter="on-time" id="filter-on-time">On Time</button>
+      </div>
+    </div>
+
+    <!-- Shipments Table -->
+    <div class="table-wrapper">
+      <table class="shipments-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th class="hide-mobile">Route</th>
+            <th class="hide-mobile">Supplier</th>
+            <th class="hide-mobile">Goods</th>
+            <th>Value</th>
+            <th>Status</th>
+            <th class="hide-mobile">Est. Loss</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="shipmentsBody">
+          <tr><td colspan="8">
+            <div class="loading-box">
+              <div class="spinner"></div>
+              <div class="loading-text">Loading shipments…</div>
+            </div>
+          </td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Executive Alert Log (only shown for Executive role via JS) -->
+    <div id="execAlertSection" style="display:none; margin-top:24px">
+      <div class="alert-log-card">
+        <div class="alert-log-title">📢 Alerts Sent</div>
+        <div id="execAlertLog"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+  <script src="data_supply.js"></script>
+  <script src="firebase_supply.js"></script>
+  <script src="main_supply.js"></script>
+</body>
+</html>

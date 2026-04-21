@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>India Map — SmartFlow Supply</title>
+  <meta name="description" content="Live India logistics map showing warehouse status, weather overlays, shipment routes and financial risk indicators." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="style_supply.css" />
+  <style>
+    /* Map page specific: full viewport height */
+    html, body { height: 100%; overflow: hidden; }
+    body { display: flex; flex-direction: column; }
+    .map-wrapper { flex: 1; position: relative; overflow: hidden; }
+    #mapContainer { width: 100%; height: 100%; }
+  </style>
+</head>
+<body class="map-page">
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <a class="nav-brand" href="dashboard_supply.html">
+      <div class="logo-icon">SF</div>
+      <span class="nav-title">SmartFlow <span>Supply</span></span>
+    </a>
+    <div class="nav-links" id="navLinks"><!-- injected by JS --></div>
+    <div style="display:flex;align-items:center;gap:8px;">
+      <div style="position:relative;">
+        <button class="notif-btn" id="notifBtn" title="Notifications">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+          <span class="notif-badge hidden" id="notifBadge">0</span>
+        </button>
+        <div class="notif-dropdown hidden" id="notifDropdown">
+          <div class="notif-header">Notifications</div>
+          <div id="notifList"><div class="notif-empty">No new notifications</div></div>
+        </div>
+      </div>
+      <div class="user-pill">
+        <span class="user-pill-dot"></span>
+        <span id="userEmail">—</span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Map -->
+  <div class="map-wrapper">
+    <div id="mapContainer"></div>
+
+    <!-- Map Legend (bottom-left) -->
+    <div class="map-legend">
+      <div class="map-legend-title">Warehouse Status</div>
+      <div class="map-legend-item"><div class="legend-circle" style="background:#ef5350;box-shadow:0 0 6px rgba(239,83,80,0.5)"></div> Disrupted</div>
+      <div class="map-legend-item"><div class="legend-circle" style="background:#ffb74d;box-shadow:0 0 6px rgba(255,183,77,0.5)"></div> At Risk</div>
+      <div class="map-legend-item"><div class="legend-circle" style="background:#4caf50;box-shadow:0 0 6px rgba(76,175,80,0.5)"></div> Safe</div>
+      <div style="border-top:1px solid #3c3d37;margin:10px 0;"></div>
+      <div class="map-legend-title">Weather</div>
+      <div class="map-legend-item">🌧 Rain &nbsp;☁ Cloud &nbsp;☀ Sunny</div>
+    </div>
+
+    <!-- Info Panel (right) — used by SCM & Finance click -->
+    <div class="map-info-panel hidden" id="mapInfoPanel">
+      <div class="map-info-header">
+        <span class="map-info-city" id="infoCityName">—</span>
+        <button class="map-info-close" id="mapInfoClose">✕</button>
+      </div>
+      <div class="map-info-body" id="mapInfoBody"><!-- injected --></div>
+    </div>
+
+    <!-- Executive Controls Panel (bottom-right) — only shown for Executive role -->
+    <div class="exec-panel hidden" id="execPanel">
+      <div class="exec-panel-title">Executive Risk View</div>
+      <div class="exec-risk-cards" id="execRiskCards"><!-- injected --></div>
+      <div class="exec-toggle-row">
+        <button class="exec-toggle active" data-type="financial" id="execToggleFinance">💰 Financial</button>
+        <button class="exec-toggle" data-type="supplier" id="execToggleSupplier">🚚 Supplier</button>
+      </div>
+      <div class="exec-alert-row">
+        <button class="exec-alert-btn finance-alert" id="alertFinanceBtn">📢 Alert Finance Team</button>
+        <button class="exec-alert-btn scm-alert" id="alertSCMBtn">📢 Alert SCM Team</button>
+      </div>
+    </div>
+
+  </div><!-- /map-wrapper -->
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+  <script src="data_supply.js"></script>
+  <script src="firebase_supply.js"></script>
+  <script src="gemini_supply.js"></script>
+  <script src="main_supply.js"></script>
+</body>
+</html>
