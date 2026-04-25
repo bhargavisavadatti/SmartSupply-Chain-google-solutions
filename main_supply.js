@@ -744,7 +744,12 @@ async function initRoute() {
     await calculateRoute(origin, dest, goods, user);
 
     loadingBox.classList.add('hidden');
+    // Reveal results BEFORE map invalidation so Leaflet has real pixel dimensions
     results.classList.remove('hidden');
+    // Force Leaflet to recalculate tile grid now that the container is visible
+    if (routeMap) {
+      setTimeout(() => { routeMap.invalidateSize(); }, 50);
+    }
     calcBtn.disabled = false;
   });
 }
@@ -820,6 +825,12 @@ function renderWeatherStrip(cities) {
 
 function renderRouteMiniMap(route, origin, dest) {
   if (routeMap) { routeMap.remove(); routeMap = null; }
+
+  // Make the results section temporarily visible so Leaflet can measure the container;
+  // the caller will re-hide/show via the loadingBox flow, but we need real dimensions now.
+  const resultsEl = document.getElementById('routeResults');
+  const wasHidden = resultsEl && resultsEl.classList.contains('hidden');
+  if (wasHidden) resultsEl.classList.remove('hidden');
 
   const originCoords = warehouseLocations[origin];
   const destCoords = warehouseLocations[dest];
