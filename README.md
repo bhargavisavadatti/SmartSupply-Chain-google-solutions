@@ -75,5 +75,5 @@ Prototype: https://finsmart-supply.web.app
 5. Open index_supply.html with Live Server
 
 ## Team
-- Team Name: FinSmart Supply
+- Team Name: SmartSupply Chain
 - Event: Google Solutions Build with AI 2026
