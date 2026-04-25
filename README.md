@@ -20,12 +20,33 @@ move next.
 Prototype: https://finsmart-supply.web.app
 
 ## Tech Stack
-- Frontend: HTML5, CSS3, Vanilla JavaScript
-- AI: Google Gemini API (gemini-pro)
-- Database: Firebase Firestore
-- Maps: Leaflet.js + OpenStreetMap
-- Charts: Chart.js
-- Hosting: Firebase Hosting (Google Cloud)
+### Frontend
+- HTML5, CSS3, Vanilla JavaScript
+
+### AI / Machine Learning
+- Google Gemini API (gemini-pro)
+  - Route risk analysis
+  - Financial impact calculation
+  - AI recommendations
+  - Supplier health scoring
+  - Cash flow insights
+
+### Maps & Location
+- Leaflet.js — interactive map rendering
+- OpenStreetMap + CARTO — map tiles
+- Custom weather overlays on routes
+
+### Database & Backend
+- Firebase Firestore — real-time NoSQL database
+- Firebase Hosting — cloud deployment
+
+### Data Visualization
+- Chart.js — cash flow forecast graphs
+- Custom donut chart — exposure breakdown
+
+### Deployment
+- Google Cloud via Firebase Hosting
+
 
 ## Features
 - Live shipment map with color coded risk status
